@@ -27,7 +27,7 @@ SET(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -O3 -DNDEBUG -fPIC -pthread 
 SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -DNDEBUG -fPIC -pthread ")
 SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lgmp  -fopenmp")
 
-option(PIR "Build applications for POSEIDON" ON)
+option(PIR "Build PIR for POSEIDON" ON)
 message(STATUS "PIR: ${PIR}")
 if (PIR)
     add_subdirectory(pir_bfv)
@@ -40,20 +40,21 @@ if (APSI)
     add_subdirectory(apsi)
 endif()
 
-option(FACE_ID "Build applications for POSEIDON" ON)
+option(FACE_ID "Build FACE_ID for POSEIDON" ON)
 message(STATUS "FACE_ID: ${FACE_ID}")
 if (FACE_ID)
     add_subdirectory(face_id)
 endif()
 
-option(TRANSFORMER "Build applications for POSEIDON" ON)
+option(TRANSFORMER "Build TRANSFORMER for POSEIDON" ON)
 message(STATUS "TRANSFORMER: ${TRANSFORMER}")
 if (TRANSFORMER)
     add_subdirectory(transformer)
 endif()
 
-option(LR_TRAIN "Build applications for POSEIDON" ON)
+option(LR_TRAIN "Build LR_TRAIN for POSEIDON" ON)
 message(STATUS "LR_TRAIN: ${LR_TRAIN}")
 if (LR_TRAIN)
     add_subdirectory(lr_train)
 endif()
+
