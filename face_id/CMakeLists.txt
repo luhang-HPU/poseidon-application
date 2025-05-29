@@ -7,7 +7,7 @@ set(FACEID_EXAMPLE
         main.cpp backend_server.cpp frontend_server.cpp json_helper.cpp
 )
 
-include_directories(../cinatra)
+include_directories(../libs/cinatra/include)
 include_directories(../monitor)
 include_directories(../nlohmann_json)
 
