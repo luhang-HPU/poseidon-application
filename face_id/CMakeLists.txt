@@ -7,7 +7,7 @@ set(FACEID_EXAMPLE
         main.cpp backend_server.cpp frontend_server.cpp json_helper.cpp
 )
 
-include_directories(../cinatra)
+include_directories(../libs/cinatra/include)
 include_directories(../monitor)
 include_directories(../nlohmann_json)
 
@@ -51,6 +51,9 @@ add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/EHa>")
 add_executable(${project_name} ${FACEID_EXAMPLE})
 target_compile_definitions(${project_name} PRIVATE ASYNC_SIMPLE_HAS_NOT_AIO)
 target_link_libraries(${project_name} PRIVATE poseidon_shared)
+target_include_directories(${project_name} PUBLIC "${CMAKE_CURRENT_LIST_DIR}/../libs")
+# message(STATUS "Header path resolved to: ${CMAKE_CURRENT_SOURCE_DIR}/../libs")
+
 
 if (ENABLE_SSL)
     target_link_libraries(${project_name} ${OPENSSL_LIBRARIES} pthread -ldl)
