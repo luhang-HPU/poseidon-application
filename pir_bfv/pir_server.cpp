@@ -246,22 +246,32 @@ PirReply PIRServer::generate_reply(PirQuery &query, uint32_t client_id)
             cout << " size mismatch!!! " << expanded_query.size() << ", " << n_i << endl;
         }
 
-        // Transform expanded query to NTT, and ...
+//        // Transform expanded query to NTT, and ...
+//        for (uint32_t jj = 0; jj < expanded_query.size(); jj++)
+//        {
+//            Ciphertext tmp;
+//            evaluator_->ntt_fwd(expanded_query[jj], tmp);
+//            expanded_query[jj] = tmp;
+//        }
+//
+//        // Transform plaintext to NTT. If database is pre-processed, can skip
+//        if ((!is_db_preprocessed_) || i > 0)
+//        {
+//            for (uint32_t jj = 0; jj < cur->size(); jj++)
+//            {
+//                Plaintext tmp;
+//                evaluator_->ntt_fwd((*cur)[jj], tmp, context_->crt_context()->first_parms_id());
+//                (*cur)[jj] = tmp;
+//            }
+//        }
+
         for (uint32_t jj = 0; jj < expanded_query.size(); jj++)
         {
-            Ciphertext tmp;
-            evaluator_->ntt_fwd(expanded_query[jj], tmp);
-            expanded_query[jj] = tmp;
-        }
-
-        // Transform plaintext to NTT. If database is pre-processed, can skip
-        if ((!is_db_preprocessed_) || i > 0)
-        {
-            for (uint32_t jj = 0; jj < cur->size(); jj++)
+            if (expanded_query[jj].is_ntt_form())
             {
-                Plaintext tmp;
-                evaluator_->ntt_fwd((*cur)[jj], tmp, context_->crt_context()->first_parms_id());
-                (*cur)[jj] = tmp;
+                Ciphertext tmp;
+                evaluator_->ntt_inv(expanded_query[jj], tmp);
+                expanded_query[jj] = tmp;
             }
         }
 
@@ -291,15 +301,15 @@ PirReply PIRServer::generate_reply(PirQuery &query, uint32_t client_id)
             }
         }
 
-        for (uint32_t jj = 0; jj < intermediateCtxts.size(); jj++)
-        {
-            Ciphertext tmp;
-            evaluator_->ntt_inv(intermediateCtxts[jj], tmp);
-            intermediateCtxts[jj] = tmp;
-            // print intermediate ctxts?
-            // cout << "const term of ctxt " << jj << " = " <<
-            // intermediateCtxts[jj][0] << endl;
-        }
+//        for (uint32_t jj = 0; jj < intermediateCtxts.size(); jj++)
+//        {
+//            Ciphertext tmp;
+//            evaluator_->ntt_inv(intermediateCtxts[jj], tmp);
+//            intermediateCtxts[jj] = tmp;
+//            // print intermediate ctxts?
+//            // cout << "const term of ctxt " << jj << " = " <<
+//            // intermediateCtxts[jj][0] << endl;
+//        }
 
         if (i == nvec.size() - 1)
         {
