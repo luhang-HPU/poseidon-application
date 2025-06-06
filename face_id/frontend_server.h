@@ -7,8 +7,7 @@
 #include "poseidon/src/decryptor.h"
 #include "poseidon/src/keygenerator.h"
 #include "poseidon/src/factory/poseidon_factory.h"
-#include "../nlohmann_json/json.hpp"
-
+#include "nlohmann_json/json.hpp"
 
 namespace facial_recognition {
 

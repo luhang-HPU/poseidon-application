@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../monitor/memory_and_cpu.h"
+#include "monitor/memory_and_cpu.h"
 #include <chrono>
 
 class MonitorForCompute
