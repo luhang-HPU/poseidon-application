@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../nlohmann_json/json.hpp"
+#include "nlohmann_json/json.hpp"
 #include "base.h"
 #include "monitor_helper.h"
 #include "poseidon/src/ckks_encoder.h"
